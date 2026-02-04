@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>測試頁</title>
+</head>
+<body style="background:pink; text-align:center; padding-top:100px;">
+  <h1>🎉 我的網站活著 🎉</h1>
+  <p>如果你看到這行字，代表 GitHub Pages 正常。</p>
+</body>
+</html>
