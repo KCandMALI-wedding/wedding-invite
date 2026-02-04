@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>婚禮邀請函</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 不讓搜尋引擎收錄 -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      margin: 0;
+      background: #f7f3f0;
+      text-align: center;
+      color: #333;
+    }
+    header {
+      padding: 50px 20px;
+      background: linear-gradient(#f3c6c6, #f7f3f0);
+    }
+    section {
+      padding: 30px 15px;
+    }
+    .card {
+      background: white;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+    }
+    h1, h2 {
+      margin: 10px 0;
+    }
+    .admin-btn {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      background: #666;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 id="titleText">我們要結婚了</h1>
+  <p id="subtitleText">誠摯邀請您一同分享我們的喜悅</p>
+</header>
+
+<section>
+  <div class="card">
+    <h2>婚禮資訊</h2>
+    <p id="infoText">
+      日期：2026年1月1日<br>
+      時間：中午 12:00<br>
+      地點：幸福大飯店
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>出席回覆</h2>
+    <p>請填寫以下表單，協助我們統計人數與餐點，謝謝您 💗</p>
+    <!-- 之後貼上你的 Google 表單 iframe -->
+    <iframe src="https://docs.google.com/forms/d/e/你的表單ID/viewform?embedded=true"
+      width="100%" height="600">載入中…</iframe>
+  </div>
+</section>
+
+<div class="admin-btn" onclick="enterAdmin()">後台編輯</div>
+
+<script>
+  const PASSWORD = "1234"; // 你之後改成自己的
+
+  function enterAdmin() {
+    const pw = prompt("請輸入後台密碼");
+    if (pw === PASSWORD) {
+      enableEdit();
+    } else {
+      alert("密碼錯誤");
+    }
+  }
+
+  function enableEdit() {
+    ["titleText", "subtitleText", "infoText"].forEach(id => {
+      const el = document.getElementById(id);
+      el.contentEditable = true;
+      el.style.border = "1px dashed red";
+      el.onblur = () => {
+        localStorage.setItem(id, el.innerHTML);
+      };
+      const saved = localStorage.getItem(id);
+      if (saved) el.innerHTML = saved;
+    });
+    alert("已進入編輯模式，點文字即可修改");
+  }
+
+  window.onload = () => {
+    ["titleText","subtitleText","infoText"].forEach(id=>{
+      const saved = localStorage.getItem(id);
+      if (saved) document.getElementById(id).innerHTML = saved;
+    });
+  };
+</script>
+
+</body>
+</html>
