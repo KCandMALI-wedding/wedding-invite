@@ -20,6 +20,30 @@
       text-align: center;
     }
 
+    .music-control {
+      position: absolute;
+      top: 20px;      /* 離 section 上方 */
+      right: 20px;    /* 離右邊 */
+      z-index: 10;    /* 保證在最上層 */
+    }
+
+    #music-btn {
+      background: rgba(255,255,255,0.6); /* 半透明文青感 */
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+#music-btn:hover {
+  background: rgba(255,255,255,0.9);
+}
     
     /* 通用背景設定（可改成圖片） */
     .bg1 {
@@ -98,6 +122,19 @@
       border-radius: 10px;
     }
 
+    .photo-text-section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    .section-text {
+      font-size: 20px;
+      line-height: 1.6;
+      color: #333;
+      max-width: 700px;
+      margin: 20px auto 0 auto; /* 上方留間距，置中 */
+    }
+
     .overlay-box {
       position: relative;
     }
@@ -124,6 +161,15 @@
 <!-- 1. 標題 -->
 <section class="bg1">
   <h1 class="title-font">我們結婚了</h1>
+
+  <!-- 音樂按鈕 -->
+  <div class="music-control">
+    <audio id="wedding-music" loop>
+      <source src="bgmusic.mp3" type="audio/mpeg">
+      您的瀏覽器不支援 audio 標籤。
+    </audio>
+    <button id="music-btn" title="沒有音樂點這裡播放唷">🎵</button>
+  </div>
 </section>
 
 <!-- 2. 大合照  -->
@@ -165,6 +211,31 @@
   <p>Sometimes, love is simply walking together.</p>
 </section>
 
+<!-- 6+7 -1 -->
+<section class="bg5">
+  <div class="two-photos">
+    <img src="photo6.png">
+    <img src="photo7.png">
+  </div>
+</section>
+
+<section class="bg4">
+  <p class="section-text">愛情就是這樣，細水長流。</p>
+</section>
+
+<!-- 6+7 -2 -->
+<section class="bg5">
+  <div class="two-photos">
+    <img src="photo8.jpg">
+    <img src="photo9.jpg">
+  </div>
+</section>
+
+<section class="bg3">
+  <p class="section-text">每一次對視，都像第一次心動。</p>
+  <p class="section-text">也肩並肩遠望，共視相同的未來。</p>
+</section>
+
 <!-- 8. 大照片  -->
 <section class="hero no-padding">
   <img src="photo5.jpg" class="hero-img">
@@ -173,8 +244,12 @@
 <!-- 9. 交通資訊 -->
 <section class="bg3">
   <h2>交通資訊</h2>
-  <p>捷運：三多商圈捷運站 走路12分鐘</p>
+  <div style="width: fit-content; margin: auto; text-align: left;">
+  <p>地址：高雄市前鎮區林森四路189號</p>
+  <p>大眾運輸1(自己搭)：三多商圈捷運站 走路12分鐘</p>
+  <p>大眾運輸2(搭接駁)：接送點在左營高鐵站</p>
   <p>開車：圖書館旁邊的停車場</p>
+  </div>
   <p>
   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2stw" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </a>
@@ -186,5 +261,23 @@
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
 </section>
 
+<!-- JavaScript 播放音樂 -->
+<script>
+  const music = document.getElementById("wedding-music");
+  const btn = document.getElementById("music-btn");
+  let playing = false;
+
+  btn.addEventListener("click", function() {
+    if (!playing) {
+      music.play();
+      playing = true;
+      btn.textContent = "🔊"; // 播放時顯示喇叭
+    } else {
+      music.pause();
+      playing = false;
+      btn.textContent = "🎵"; // 暫停時顯示音符
+    }
+  });
+</script>
 </body>
 </html>
