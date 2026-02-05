@@ -80,6 +80,64 @@
       transform: translateX(0);
    }
 
+/* 左右小人初始大小 & 位置 */
+.jump-left, .jump-right {
+  position: absolute;
+  bottom: 0;
+  width: 120px;        /* 放大小人 */
+  opacity: 0;
+  transform: translateY(20px) scale(1);
+  z-index: 5;
+}
+
+.jump-left { left: 0; }
+.jump-right { right: 0; }
+
+/* 左邊小人更自然連續跳躍到中間 */
+@keyframes jump-left-to-center {
+  0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
+  10%  { opacity: 1; transform: translateX(5vw) translateY(-25px) scale(1.05); }
+  20%  { transform: translateX(10vw) translateY(15px) scale(1); }
+  30%  { transform: translateX(15vw) translateY(-35px) scale(1.1); }
+  40%  { transform: translateX(20vw) translateY(10px) scale(1.05); }
+  50%  { transform: translateX(25vw) translateY(-20px) scale(1.1); }
+  55%  { transform: translateX(50vw) translateY(0) scale(1.2); } /* 中間碰撞 */
+  57%  { transform: translateX(50vw) translateY(-10px) scale(1.15); } /* 碰撞晃動 */
+  60%  { transform: translateX(50vw) translateY(0) scale(1.2); }
+  65%  { transform: translateX(60vw) translateY(-20px) scale(1.05); }
+  75%  { transform: translateX(75vw) translateY(15px) scale(1); }
+  85%  { transform: translateX(90vw) translateY(-10px) scale(1); opacity: 1; }
+  95%  { transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
+  100%{ transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
+}
+
+/* 右邊小人更自然連續跳躍到中間 */
+@keyframes jump-right-to-center {
+  0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
+  10%  { opacity: 1; transform: translateX(-5vw) translateY(-30px) scale(1.1); }
+  20%  { transform: translateX(-12vw) translateY(10px) scale(1); }
+  30%  { transform: translateX(-18vw) translateY(-25px) scale(1.05); }
+  40%  { transform: translateX(-25vw) translateY(20px) scale(1); }
+  50%  { transform: translateX(-35vw) translateY(-15px) scale(1.1); }
+  55%  { transform: translateX(-50vw) translateY(0) scale(1.2); } /* 中間碰撞 */
+  57%  { transform: translateX(-50vw) translateY(-10px) scale(1.15); } /* 碰撞晃動 */
+  60%  { transform: translateX(-50vw) translateY(0) scale(1.2); }
+  65%  { transform: translateX(-60vw) translateY(-20px) scale(1.05); }
+  75%  { transform: translateX(-75vw) translateY(10px) scale(1); }
+  85%  { transform: translateX(-90vw) translateY(-5px) scale(1); opacity: 1; }
+  95%  { transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
+  100%{ transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
+}
+
+/* 觸發動畫 */
+.jump-left.active {
+  animation: jump-left-to-center 6s ease-in-out forwards;
+}
+
+.jump-right.active {
+  animation: jump-right-to-center 6s ease-in-out forwards;
+}
+
     /* 通用背景設定（可改成圖片） */
     .bg1 {
      background-image: url("bg1.jpg");  /* 背景圖片 */
@@ -268,9 +326,13 @@
   </div>
 </section>
 
-<!-- 7. 節奏文字 -->
-<section class="bg2 fade-up">
+<!-- 7. 節奏文字 + 小人跳出 -->
+<section class="bg2 jump-section" style="position: relative; overflow: hidden;">
   <p>Sometimes, love is simply walking together.</p>
+
+  <!-- 左右跳出小人 -->
+  <img src="boy.png" class="jump-left" alt="小人左">
+  <img src="girl.png" class="jump-right" alt="小人右">
 </section>
 
 <!-- 6+7 -1 -->
@@ -394,6 +456,23 @@
       alert("圖片無法右鍵下載喔～");
     }
   });
+</script>
+
+<script>
+  const jumpLeft = document.querySelectorAll('.jump-left');
+  const jumpRight = document.querySelectorAll('.jump-right');
+
+  const jumpObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');  // 加上 active 觸發 CSS
+        observer.unobserve(entry.target);      // 只觸發一次
+      }
+    });
+  }, { threshold: 0.1 });
+
+  jumpLeft.forEach(el => jumpObserver.observe(el));
+  jumpRight.forEach(el => jumpObserver.observe(el));
 </script>
 
 </body>
