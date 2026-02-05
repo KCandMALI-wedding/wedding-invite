@@ -41,10 +41,45 @@
       transition: background 0.3s;
     }
 
-#music-btn:hover {
-  background: rgba(255,255,255,0.9);
-}
+    #music-btn:hover {
+      background: rgba(255,255,255,0.9);
+    }
+
     
+    /* 基本淡入 + 向上滑動動畫 */
+    .fade-up {
+     opacity: 0;           /* 初始透明 */
+      transform: translateY(20px);  /* 往下位移 20px */
+      transition: all 0.8s ease-out; /* 動畫時間與效果 */
+    }
+
+    /* 加上 active class 後就淡入 */
+    .fade-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 從左邊滑入 */
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-50px); /* 從左偏移50px */
+      transition: all 0.8s ease-out;
+    }
+
+    /* 從右邊滑入 */
+    .fade-right {
+      opacity: 0;
+      transform: translateX(50px); /* 從右偏移50px */
+      transition: all 0.8s ease-out;
+    }
+
+    /* active 狀態 */
+    .fade-left.active,
+    .fade-right.active {
+      opacity: 1;
+      transform: translateX(0);
+   }
+
     /* 通用背景設定（可改成圖片） */
     .bg1 {
      background-image: url("bg1.jpg");  /* 背景圖片 */
@@ -153,6 +188,33 @@
     iframe {
       border: none;
     }
+
+    /* 打字效果 */
+    .typewriter {
+      overflow: hidden;             /* 隱藏溢出文字 */
+      border-right: .15em solid #333;  /* 游標線 */
+      white-space: nowrap;           /* 不換行 */
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+
+    /* 打字動畫 */
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* 游標閃爍 */
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    img {
+      pointer-events: auto;      /* 保留其他互動 */
+      -webkit-user-drag: none;   /* Chrome, Safari */
+      -moz-user-drag: none;      /* Firefox */
+      -ms-user-drag: none;       /* IE */
+      user-select: none;         /* 禁止選取圖片文字 */
+    }
   </style>
 </head>
 
@@ -179,18 +241,18 @@
 
 <!-- 3. 英文短句 -->
 <section class="bg2">
-  <p>“Love is not just looking at each other, but looking in the same direction.”</p>
+  <p class="typewriter">“Love is not just looking at each other, but looking in the same direction.”</p>
 </section>
 
 <!-- 4. 小合照 -->
-<section class="bg3">
+<section class="bg3 fade-up">
   <div class="small-photo">
     <img src="photo2.jpg" alt="合照">
   </div>
 </section>
 
 <!-- 5. 中文情書段落 -->
-<section class="bg4">
+<section class="bg4 fade-up">
   <p>
     曾經以為愛是全世界，<br>
     彼此的細碎小事都關心著，<br>
@@ -199,7 +261,7 @@
 </section>
 
 <!-- 6. 兩張合照 -->
-<section class="bg5">
+<section class="bg5 fade-up">
   <div class="two-photos">
     <img src="photo3.jpg">
     <img src="photo4.jpg">
@@ -207,42 +269,42 @@
 </section>
 
 <!-- 7. 節奏文字 -->
-<section class="bg2">
+<section class="bg2 fade-up">
   <p>Sometimes, love is simply walking together.</p>
 </section>
 
 <!-- 6+7 -1 -->
-<section class="bg5">
+<section class="bg5 fade-up">
   <div class="two-photos">
-    <img src="photo6.png">
-    <img src="photo7.png">
+    <img src="photo6.png" class="fade-left">
+    <img src="photo7.png" class="fade-right">
   </div>
 </section>
 
-<section class="bg4">
+<section class="bg4 fade-up">
   <p class="section-text">愛情就是這樣，細水長流。</p>
 </section>
 
 <!-- 6+7 -2 -->
-<section class="bg5">
+<section class="bg5 fade-up">
   <div class="two-photos">
     <img src="photo8.jpg">
     <img src="photo9.jpg">
   </div>
 </section>
 
-<section class="bg3">
+<section class="bg3 fade-up">
   <p class="section-text">每一次對視，都像第一次心動。</p>
   <p class="section-text">也肩並肩遠望，共視相同的未來。</p>
 </section>
 
 <!-- 8. 大照片  -->
-<section class="hero no-padding">
+<section class="hero no-padding fade-up">
   <img src="photo5.jpg" class="hero-img">
 </section>
 
 <!-- 9. 交通資訊 -->
-<section class="bg3">
+<section class="bg3 fade-up">
   <h2>交通資訊</h2>
   <div style="width: fit-content; margin: auto; text-align: left;">
   <p>地址：高雄市前鎮區林森四路189號</p>
@@ -256,7 +318,7 @@
 </section>
 
 <!-- 10. Google 表單 -->
-<section class="bg5">
+<section class="bg5 fade-up">
   <h2>出席回覆</h2>
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
 </section>
@@ -279,5 +341,60 @@
     }
   });
 </script>
+
+<script>
+  // 找到所有想要淡入的元素
+  const faders = document.querySelectorAll('.fade-up');
+
+  const appearOptions = {
+    threshold: 0.1, // 當 10% 可見就觸發
+  };
+
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('active'); // 加上 active 觸發 CSS
+      observer.unobserve(entry.target);      // 不再監控
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+<script>
+  // 找到所有左右滑入元素
+  const leftFaders = document.querySelectorAll('.fade-left');
+  const rightFaders = document.querySelectorAll('.fade-right');
+
+  // IntersectionObserver 參數
+  const appearOptionsLR = { threshold: 0.1 };
+
+  // 建立監控函式，改名為 observerLR
+  const observerLR = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active'); // 加上 active 觸發 CSS
+        observer.unobserve(entry.target);      // 停止監控這個元素
+      }
+    });
+  }, appearOptionsLR);
+
+  // 開始監控左右滑入元素
+  leftFaders.forEach(function(el) { observerLR.observe(el); });
+  rightFaders.forEach(function(el) { observerLR.observe(el); });
+</script>
+
+<script>
+  // 禁止右鍵
+  document.addEventListener('contextmenu', function(e) {
+    if(e.target.tagName === 'IMG'){ // 只禁止圖片右鍵
+      e.preventDefault();
+      alert("圖片無法右鍵下載喔～");
+    }
+  });
+</script>
+
 </body>
 </html>
