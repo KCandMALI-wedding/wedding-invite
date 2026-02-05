@@ -2,32 +2,33 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin&family=Yuji+Mai&display=swap" rel="stylesheet">
   <title>我們結婚了</title>
   <style>
     body {
       margin: 0;
-      font-family: "Noto Serif TC", serif;
+      font-family: "Playfair Display", serif;
       line-height: 1.8;
+      font-size: 18px;
     }
 
+    .title-font {
+      font-family: "Kaisei Tokumin", serif;
+    }
     section {
       padding: 80px 10%;
       text-align: center;
     }
 
-.bg-photo {
-  background-image: url('photo1startpage.jpg');
-  background-size: cover;        /* 不變形鋪滿 */
-  background-position: center center;  /* 置中 */
-  background-repeat: no-repeat;
-  height: 100vh;                /* ★這行就是控制照片高度 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
     
     /* 通用背景設定（可改成圖片） */
-    .bg1 { background: #f6efe9; }
+    .bg1 {
+     background-image: url("bg1.jpg");  /* 背景圖片 */
+     background-size: cover;             /* 滿版，比例會裁切 */
+     background-position: center;        /* 置中 */
+     background-repeat: no-repeat;       /* 不重複 */
+    }
+
     .bg2 { background: #ffffff; }
     .bg3 { background: #f2f2f2; }
     .bg4 { background: #e8ecef; }
@@ -40,8 +41,32 @@
       color: white;
     }
 
-    h1, h2 {
+    .hero {
+      width: 100vw;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    h1 {
       letter-spacing: 2px;
+      font-size: 80px;
+    }
+
+    h2 {
+      letter-spacing: 2px;
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 20px;
     }
 
     .big-photo {
@@ -88,11 +113,6 @@
       color: #333;
     }
 
-    .calendar {
-      font-size: 32px;
-      letter-spacing: 4px;
-    }
-
     iframe {
       border: none;
     }
@@ -103,16 +123,12 @@
 
 <!-- 1. 標題 -->
 <section class="bg1">
-  <h1>我們結婚了</h1>
+  <h1 class="title-font">我們結婚了</h1>
 </section>
 
-<!-- 2. 大合照 + 婚禮資訊 -->
-<section class="bg-photo">
-  <div class="overlay-text">
-    <h2>邱冠智 & 李敏葶</h2>
-    <p>婚禮時間：115.05.30(六) 中午12:00</p>
-    <p>地點：萊特薇庭高雄館</p>
-  </div>
+<!-- 2. 大合照  -->
+<section class="hero no-padding">
+  <img src="photo1startpage.jpg" class="hero-img">
 </section>
 
 <!-- 3. 英文短句 -->
@@ -149,10 +165,9 @@
   <p>Sometimes, love is simply walking together.</p>
 </section>
 
-<!-- 8. 大照片 + 透明月曆 -->
-<section class="bg-photo" style="background-image:url('photo5.jpg');">
-  <div class="overlay-text">
-  </div>
+<!-- 8. 大照片  -->
+<section class="hero no-padding">
+  <img src="photo5.jpg" class="hero-img">
 </section>
 
 <!-- 9. 交通資訊 -->
@@ -166,16 +181,10 @@
 </section>
 
 <!-- 10. Google 表單 -->
-<section class="bg1">
+<section class="bg5">
   <h2>出席回覆</h2>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="640" height="657" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
 </section>
 
 </body>
-
 </html>
-
-
-
-
-

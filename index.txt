@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin&family=Yuji+Mai&display=swap" rel="stylesheet">
+  <title>我們結婚了</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    .title-font {
+      font-family: "Kaisei Tokumin", serif;
+    }
+    section {
+      padding: 80px 10%;
+      text-align: center;
+    }
+
+    
+    /* 通用背景設定（可改成圖片） */
+    .bg1 {
+     background-image: url("bg1.jpg");  /* 背景圖片 */
+     background-size: cover;             /* 滿版，比例會裁切 */
+     background-position: center;        /* 置中 */
+     background-repeat: no-repeat;       /* 不重複 */
+    }
+
+    .bg2 { background: #ffffff; }
+    .bg3 { background: #f2f2f2; }
+    .bg4 { background: #e8ecef; }
+    .bg5 { background: #f9f5f0; }
+
+    /* 背景圖片範例 */
+    .bg-photo {
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero {
+      width: 100vw;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .no-padding {
+      padding: 0;
+    }
+
+    h1 {
+      letter-spacing: 2px;
+      font-size: 80px;
+    }
+
+    h2 {
+      letter-spacing: 2px;
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    .big-photo {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .big-photo img,
+    .small-photo img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .small-photo {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .two-photos {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .two-photos img {
+      width: 45%;
+      border-radius: 10px;
+    }
+
+    .overlay-box {
+      position: relative;
+    }
+
+    .overlay-text {
+      position: absolute;
+      top: 125%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.6);
+      padding: 40px;
+      border-radius: 10px;
+      color: #333;
+    }
+
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 1. 標題 -->
+<section class="bg1">
+  <h1 class="title-font">我們結婚了</h1>
+</section>
+
+<!-- 2. 大合照  -->
+<section class="hero no-padding">
+  <img src="photo1startpage.jpg" class="hero-img">
+</section>
+
+<!-- 3. 英文短句 -->
+<section class="bg2">
+  <p>“Love is not just looking at each other, but looking in the same direction.”</p>
+</section>
+
+<!-- 4. 小合照 -->
+<section class="bg3">
+  <div class="small-photo">
+    <img src="photo2.jpg" alt="合照">
+  </div>
+</section>
+
+<!-- 5. 中文情書段落 -->
+<section class="bg4">
+  <p>
+    曾經以為愛是全世界，<br>
+    彼此的細碎小事都關心著，<br>
+    0.5+0.5=1。
+  </p>
+</section>
+
+<!-- 6. 兩張合照 -->
+<section class="bg5">
+  <div class="two-photos">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+  </div>
+</section>
+
+<!-- 7. 節奏文字 -->
+<section class="bg2">
+  <p>Sometimes, love is simply walking together.</p>
+</section>
+
+<!-- 8. 大照片  -->
+<section class="hero no-padding">
+  <img src="photo5.jpg" class="hero-img">
+</section>
+
+<!-- 9. 交通資訊 -->
+<section class="bg3">
+  <h2>交通資訊</h2>
+  <p>捷運：三多商圈捷運站 走路12分鐘</p>
+  <p>開車：圖書館旁邊的停車場</p>
+  <p>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2stw" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </a>
+</section>
+
+<!-- 10. Google 表單 -->
+<section class="bg5">
+  <h2>出席回覆</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+</section>
+
+</body>
+</html>
