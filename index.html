@@ -22,13 +22,13 @@
 
     .music-control {
       position: absolute;
-      top: 20px;      /* 離 section 上方 */
-      right: 20px;    /* 離右邊 */
-      z-index: 10;    /* 保證在最上層 */
+      top: 20px;
+      right: 20px;
+      z-index: 10;
     }
 
     #music-btn {
-      background: rgba(255,255,255,0.6); /* 半透明文青感 */
+      background: rgba(255,255,255,0.6);
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -45,237 +45,204 @@
       background: rgba(255,255,255,0.9);
     }
 
-    
-    /* 基本淡入 + 向上滑動動畫 */
     .fade-up {
-     opacity: 0;           /* 初始透明 */
-      transform: translateY(20px);  /* 往下位移 20px */
-      transition: all 0.8s ease-out; /* 動畫時間與效果 */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
     }
 
-    /* 加上 active class 後就淡入 */
     .fade-up.active {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* 從左邊滑入 */
     .fade-left {
       opacity: 0;
-      transform: translateX(-50px); /* 從左偏移50px */
+      transform: translateX(-50px);
       transition: all 0.8s ease-out;
     }
 
-    /* 從右邊滑入 */
     .fade-right {
       opacity: 0;
-      transform: translateX(50px); /* 從右偏移50px */
+      transform: translateX(50px);
       transition: all 0.8s ease-out;
     }
 
-    /* active 狀態 */
     .fade-left.active,
     .fade-right.active {
       opacity: 1;
       transform: translateX(0);
-   }
-
-/* 左右小人初始大小 & 位置 */
-.jump-left, .jump-right {
-  position: absolute;
-  bottom: 0;
-  width: 120px;        /* 放大小人 */
-  opacity: 0;
-  transform: translateY(20px) scale(1);
-  z-index: 5;
-}
-
-.jump-left { left: 0; }
-.jump-right { right: 0; }
-
-/* 左邊小人更自然連續跳躍到中間 */
-@keyframes jump-left-to-center {
-  0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
-  10%  { opacity: 1; transform: translateX(5vw) translateY(-25px) scale(1.05); }
-  20%  { transform: translateX(10vw) translateY(15px) scale(1); }
-  30%  { transform: translateX(15vw) translateY(-35px) scale(1.1); }
-  40%  { transform: translateX(20vw) translateY(10px) scale(1.05); }
-  50%  { transform: translateX(25vw) translateY(-20px) scale(1.1); }
-  55%  { transform: translateX(50vw) translateY(0) scale(1.2); } /* 中間碰撞 */
-  57%  { transform: translateX(50vw) translateY(-10px) scale(1.15); } /* 碰撞晃動 */
-  60%  { transform: translateX(50vw) translateY(0) scale(1.2); }
-  65%  { transform: translateX(60vw) translateY(-20px) scale(1.05); }
-  75%  { transform: translateX(75vw) translateY(15px) scale(1); }
-  85%  { transform: translateX(90vw) translateY(-10px) scale(1); opacity: 1; }
-  95%  { transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
-  100%{ transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
-}
-
-/* 右邊小人更自然連續跳躍到中間 */
-@keyframes jump-right-to-center {
-  0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
-  10%  { opacity: 1; transform: translateX(-5vw) translateY(-30px) scale(1.1); }
-  20%  { transform: translateX(-12vw) translateY(10px) scale(1); }
-  30%  { transform: translateX(-18vw) translateY(-25px) scale(1.05); }
-  40%  { transform: translateX(-25vw) translateY(20px) scale(1); }
-  50%  { transform: translateX(-35vw) translateY(-15px) scale(1.1); }
-  55%  { transform: translateX(-50vw) translateY(0) scale(1.2); } /* 中間碰撞 */
-  57%  { transform: translateX(-50vw) translateY(-10px) scale(1.15); } /* 碰撞晃動 */
-  60%  { transform: translateX(-50vw) translateY(0) scale(1.2); }
-  65%  { transform: translateX(-60vw) translateY(-20px) scale(1.05); }
-  75%  { transform: translateX(-75vw) translateY(10px) scale(1); }
-  85%  { transform: translateX(-90vw) translateY(-5px) scale(1); opacity: 1; }
-  95%  { transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
-  100%{ transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
-}
-
-/* 觸發動畫 */
-.jump-left.active {
-  animation: jump-left-to-center 6s ease-in-out forwards;
-}
-
-.jump-right.active {
-  animation: jump-right-to-center 6s ease-in-out forwards;
-}
-
-    /* 通用背景設定（可改成圖片） */
-    .bg1 {
-     background-image: url("bg1.jpg");  /* 背景圖片 */
-     background-size: cover;             /* 滿版，比例會裁切 */
-     background-position: center;        /* 置中 */
-     background-repeat: no-repeat;       /* 不重複 */
     }
 
+    .jump-left, .jump-right {
+      position: absolute;
+      bottom: 0;
+      width: 120px;
+      opacity: 0;
+      transform: translateY(20px) scale(1);
+      z-index: 5;
+    }
+
+    .jump-left { left: 0; }
+    .jump-right { right: 0; }
+
+    @keyframes jump-left-to-center {
+      0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
+      10%  { opacity: 1; transform: translateX(5vw) translateY(-25px) scale(1.05); }
+      20%  { transform: translateX(10vw) translateY(15px) scale(1); }
+      30%  { transform: translateX(15vw) translateY(-35px) scale(1.1); }
+      40%  { transform: translateX(20vw) translateY(10px) scale(1.05); }
+      50%  { transform: translateX(25vw) translateY(-20px) scale(1.1); }
+      55%  { transform: translateX(50vw) translateY(0) scale(1.2); }
+      57%  { transform: translateX(50vw) translateY(-10px) scale(1.15); }
+      60%  { transform: translateX(50vw) translateY(0) scale(1.2); }
+      65%  { transform: translateX(60vw) translateY(-20px) scale(1.05); }
+      75%  { transform: translateX(75vw) translateY(15px) scale(1); }
+      85%  { transform: translateX(90vw) translateY(-10px) scale(1); opacity: 1; }
+      95%  { transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
+      100%{ transform: translateX(100vw) translateY(0) scale(1); opacity: 0; }
+    }
+
+    @keyframes jump-right-to-center {
+      0%   { transform: translateX(0) translateY(20px) scale(1); opacity: 0; }
+      10%  { opacity: 1; transform: translateX(-5vw) translateY(-30px) scale(1.1); }
+      20%  { transform: translateX(-12vw) translateY(10px) scale(1); }
+      30%  { transform: translateX(-18vw) translateY(-25px) scale(1.05); }
+      40%  { transform: translateX(-25vw) translateY(20px) scale(1); }
+      50%  { transform: translateX(-35vw) translateY(-15px) scale(1.1); }
+      55%  { transform: translateX(-50vw) translateY(0) scale(1.2); }
+      57%  { transform: translateX(-50vw) translateY(-10px) scale(1.15); }
+      60%  { transform: translateX(-50vw) translateY(0) scale(1.2); }
+      65%  { transform: translateX(-60vw) translateY(-20px) scale(1.05); }
+      75%  { transform: translateX(-75vw) translateY(10px) scale(1); }
+      85%  { transform: translateX(-90vw) translateY(-5px) scale(1); opacity: 1; }
+      95%  { transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
+      100%{ transform: translateX(-100vw) translateY(0) scale(1); opacity: 0; }
+    }
+
+    .jump-left.active {
+      animation: jump-left-to-center 6s ease-in-out forwards;
+    }
+
+    .jump-right.active {
+      animation: jump-right-to-center 6s ease-in-out forwards;
+    }
+
+    .bg1 { background-image: url("bg1.jpg"); background-size: cover; background-position: center; background-repeat: no-repeat; }
     .bg2 { background: #ffffff; }
     .bg3 { background: #f2f2f2; }
     .bg4 { background: #e8ecef; }
     .bg5 { background: #f9f5f0; }
+    .bg6 { background: #f3efe9; }
 
-    /* 背景圖片範例 */
-    .bg-photo {
-      background-size: cover;
-      background-position: center;
-      color: white;
-    }
+    .bg-photo { background-size: cover; background-position: center; color: white; }
+    .hero { width: 100vw; }
+    .hero-img { width: 100%; height: auto; display: block; }
+    .no-padding { padding: 0; }
 
-    .hero {
-      width: 100vw;
-    }
+    h1 { letter-spacing: 2px; font-size: 80px; }
+    h2 { letter-spacing: 2px; font-size: 48px; }
+    p { font-size: 20px; }
 
-    .hero-img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .no-padding {
-      padding: 0;
-    }
-
-    h1 {
-      letter-spacing: 2px;
-      font-size: 80px;
-    }
-
-    h2 {
-      letter-spacing: 2px;
-      font-size: 48px;
-    }
-
-    p {
-      font-size: 20px;
-    }
-
-    .big-photo {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
+    .big-photo { width: 100%; max-width: 900px; margin: 0 auto; }
     .big-photo img,
-    .small-photo img {
-      width: 100%;
-      border-radius: 10px;
-    }
+    .small-photo img { width: 100%; border-radius: 10px; }
 
-    .small-photo {
-      max-width: 500px;
-      margin: 0 auto;
-    }
+    .small-photo { max-width: 500px; margin: 0 auto; }
+    .two-photos { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .two-photos img { width: 45%; border-radius: 10px; }
 
-    .two-photos {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .photo-text-section { padding: 60px 10%; text-align: center; }
+    .section-text { font-size: 20px; line-height: 1.6; color: #333; max-width: 700px; margin: 20px auto 0 auto; }
 
-    .two-photos img {
-      width: 45%;
-      border-radius: 10px;
-    }
+    .overlay-box { position: relative; }
+    .overlay-text { position: absolute; top: 125%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.6); padding: 40px; border-radius: 10px; color: #333; }
 
-    .photo-text-section {
-      padding: 60px 10%;
+    iframe { border: none; }
+
+    .typewriter { overflow: hidden; border-right: .15em solid #333; white-space: nowrap; animation: typing 3s steps(40, end), blink 0.75s step-end infinite; }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    img { pointer-events: auto; -webkit-user-drag: none; -moz-user-drag: none; -ms-user-drag: none; user-select: none; }
+
+    .love-text { max-width: 420px; margin: 0 auto; text-align: left; line-height: 1.8; }
+    .love-letter {
+      max-width: 420px;
+      margin: 50px auto;
+      text-align: left;
+      font-size: 17px;
+      line-height: 1.9;
+      letter-spacing: 0.05em;
+      color: #6b4f3b;
+      font-family: "Kaisei Tokumin", "Yuji Mai", serif;
+      position: relative;
+      padding-left: 18px;
+    }
+    .love-letter::before { content: "❝"; position: absolute; left: 0; top: -10px; font-size: 24px; color: #c97b84; }
+
+    .love-quote {
+      margin: 60px auto;
       text-align: center;
+      font-size: 22px;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+      color: #c97b84;
+      font-family: "Kaisei Tokumin", "Yuji Mai", serif;
     }
+    .love-quote::before, .love-quote::after { content: "✿"; margin: 0 10px; color: #e5b3b8; }
 
-    .section-text {
+    .love-life {
+      margin: 60px auto;
+      text-align: center;
       font-size: 20px;
-      line-height: 1.6;
-      color: #333;
-      max-width: 700px;
-      margin: 20px auto 0 auto; /* 上方留間距，置中 */
-    }
-
-    .overlay-box {
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+      color: #6b4f3b;
+      font-family: "Kaisei Tokumin", "Yuji Mai", serif;
       position: relative;
     }
+    .love-life::before { content: "❤"; display: block; margin-bottom: 10px; color: #c97b84; }
 
-    .overlay-text {
-      position: absolute;
-      top: 125%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.6);
-      padding: 40px;
-      border-radius: 10px;
-      color: #333;
-    }
+    .quote-en { font-family: "Times New Roman", serif; color: #6b4f3b; text-align: center; font-size: 18px; letter-spacing: 1px; margin: 40px auto; position: relative; }
+    .quote-en::before, .quote-en::after { content: ""; display: block; width: 60px; height: 1px; background: #c9b8a8; margin: 12px auto; }
 
-    iframe {
-      border: none;
-    }
+    .timeline { position: relative; width: fit-content; margin: 40px auto 0; padding-left: 60px; }
+    .timeline::before { content: ""; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: #c9b8a8; }
+    .timeline-item { position: relative; margin-bottom: 30px; padding-left: 30px; text-align: left; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+    .timeline-item.show { opacity: 1; transform: translateY(0); }
+    .timeline-item::before { content: "❤"; position: absolute; left: -4px; top: 2px; font-size: 14px; color: #c97b84; }
+    .section-title { font-family: "Kaisei Tokumin", "Yuji Mai", serif; color: #6b4f3b; font-size: 28px; letter-spacing: 1px; font-weight: bold; text-align: center; margin-bottom: 30px; position: relative; }
+    .section-title::before, .section-title::after { content: "✿"; margin: 0 10px; color: #e5b3b8; }
+    .timeline-time { font-weight: bold; color: #6b4f3b; margin-right: 6px; font-family: "Kaisei Tokumin", "Yuji Mai", serif; }
+    .timeline-text { color: #333; font-family: "Kaisei Tokumin", "Yuji Mai", serif; }
 
-    /* 打字效果 */
-    .typewriter {
-      overflow: hidden;             /* 隱藏溢出文字 */
-      border-right: .15em solid #333;  /* 游標線 */
-      white-space: nowrap;           /* 不換行 */
-      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    .transport {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 24px 20px;
+      padding-bottom: 0; /* 只保留上方或側邊 padding */
+      background: #f8f4ef;
+      border-radius: 16px;
+      text-align: left;
+      font-family: "Kaisei Tokumin", "Yuji Mai", serif;
+      color: #6b4f3b;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 微微浮起感 */
+      border: 2px dashed #f3c6c6; /* 可愛的框線 */
     }
+    .transport h2 { text-align: center; font-size: 22px; margin-bottom: 20px; letter-spacing: 1px; }
+    .transport p { margin: 10px 0; line-height: 1.8; font-size: 16px; }
+    .transport iframe {
+  display: block;   /* 去掉 inline-block 底部空隙 */
+  margin: 0;        /* 去掉瀏覽器預設外距 */
+  padding: 0;       /* 避免內距 */
+  width: 100%;
+  height: 400px;    /* 可調整 */
+  border: 0;
+}
 
-    /* 打字動畫 */
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    /* 游標閃爍 */
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    img {
-      pointer-events: auto;      /* 保留其他互動 */
-      -webkit-user-drag: none;   /* Chrome, Safari */
-      -moz-user-drag: none;      /* Firefox */
-      -ms-user-drag: none;       /* IE */
-      user-select: none;         /* 禁止選取圖片文字 */
-    }
   </style>
 </head>
-
 <body>
 
 <!-- 1. 標題 -->
@@ -299,7 +266,9 @@
 
 <!-- 3. 英文短句 -->
 <section class="bg2">
-  <p class="typewriter">“Love is not just looking at each other, but looking in the same direction.”</p>
+  <p class="quote-en typewriter">
+  ✦ Love is not just looking at each other, but looking in the same direction.” ✦
+</p>
 </section>
 
 <!-- 4. 小合照 -->
@@ -311,11 +280,12 @@
 
 <!-- 5. 中文情書段落 -->
 <section class="bg4 fade-up">
-  <p>
-    曾經以為愛是全世界，<br>
-    彼此的細碎小事都關心著，<br>
-    0.5+0.5=1。
-  </p>
+<div class="love-letter">
+  曾經以為，愛是全世界，<br>
+  直到遇到彼此，才發現愛藏在日常的瑣碎裡，<br>
+  我們各自縮小一點點，剛好湊成一個圓，<br>
+  0.5+0.5=1。
+</div>
 </section>
 
 <!-- 6. 兩張合照 -->
@@ -328,7 +298,9 @@
 
 <!-- 7. 節奏文字 + 小人跳出 -->
 <section class="bg2 jump-section" style="position: relative; overflow: hidden;">
-  <p>Sometimes, love is simply walking together.</p>
+  <p class="quote-en">
+    Sometimes, love is simply walking together.
+  </p>
 
   <!-- 左右跳出小人 -->
   <img src="boy.png" class="jump-left" alt="小人左">
@@ -344,7 +316,9 @@
 </section>
 
 <section class="bg4 fade-up">
-  <p class="section-text">愛情就是這樣，細水長流。</p>
+  <div class="love-quote">
+  愛情就是這樣，細水長流。
+</div>
 </section>
 
 <!-- 6+7 -2 -->
@@ -356,8 +330,10 @@
 </section>
 
 <section class="bg3 fade-up">
-  <p class="section-text">每一次對視，都像第一次心動。</p>
-  <p class="section-text">也肩並肩遠望，共視相同的未來。</p>
+  <div class="love-life">
+  一屋，兩人，三餐，四季。<br>
+  往後的風景，我們一起看。
+</div>
 </section>
 
 <!-- 8. 大照片  -->
@@ -365,24 +341,47 @@
   <img src="photo5.jpg" class="hero-img">
 </section>
 
-<!-- 9. 交通資訊 -->
-<section class="bg3 fade-up">
-  <h2>交通資訊</h2>
-  <div style="width: fit-content; margin: auto; text-align: left;">
-  <p>地址：高雄市前鎮區林森四路189號</p>
-  <p>大眾運輸1(自己搭)：三多商圈捷運站 走路12分鐘</p>
-  <p>大眾運輸2(搭接駁)：接送點在左營高鐵站</p>
-  <p>開車：圖書館旁邊的停車場</p>
+<!-- 8-1. 流程表 -->
+<section class="bg6 fade-up">
+  <h2 class="section-title">流程表</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-time">11:30</span>
+      <span class="timeline-text">賓客入場</span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-time">12:00</span>
+      <span class="timeline-text">婚宴開始</span>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-time">15:00</span>
+      <span class="timeline-text">送客</span>
+    </div>
   </div>
-  <p>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2stw" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </a>
+</section>
+
+<!-- 9. 交通資訊 -->
+<section class="transport">
+  <h2>How to get there ✿ 交通資訊</h2>
+  <p>🏡 地址｜高雄市前鎮區林森四路189號(萊特薇庭高雄館)</p>
+  <p>🚗 開車｜圖書館旁邊有停車場</p>
+  <p>🚆 大眾運輸1-自行搭｜可搭至三多商圈捷運站 走路12分鐘</p>
+  <p>🚌 大眾運輸2-搭接駁｜接送點在左營高鐵站</p>
+  <p>　　　　　　　　　　(等統計完再確定集合上車時間)</p>
+  </section>
+  </section>
+  <div style="background:#f8f4ef; border-radius:16px; overflow:hidden;">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2st" width="100%" height="400" style="border:0; display:block;"></iframe>
+</div>
 </section>
 
 <!-- 10. Google 表單 -->
 <section class="bg5 fade-up">
-  <h2>出席回覆</h2>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+  <h2 class="section-title">出席回覆</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
 </section>
 
 <!-- JavaScript 播放音樂 -->
@@ -473,6 +472,24 @@
 
   jumpLeft.forEach(el => jumpObserver.observe(el));
   jumpRight.forEach(el => jumpObserver.observe(el));
+</script>
+
+<script>
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+const timelineObserver = new IntersectionObserver(entries => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('show');
+      }, index * 300); // 每條慢 0.3 秒出來
+    }
+  });
+}, { threshold: 0.3 });
+
+timelineItems.forEach(item => {
+  timelineObserver.observe(item);
+});
 </script>
 
 </body>
