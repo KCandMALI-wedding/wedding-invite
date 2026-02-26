@@ -218,18 +218,21 @@
     .timeline-text { color: #333; font-family: "Kaisei Tokumin", "Yuji Mai", serif; }
 
     .transport {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 24px 20px;
-      padding-bottom: 0; /* 只保留上方或側邊 padding */
-      background: #f8f4ef;
-      border-radius: 16px;
-      text-align: left;
-      font-family: "Kaisei Tokumin", "Yuji Mai", serif;
-      color: #6b4f3b;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 微微浮起感 */
-      border: 2px dashed #f3c6c6; /* 可愛的框線 */
-    }
+  width: fit-content;        /* ✨ 讓框框依內容大小 */
+  max-width: 90vw;           /* 手機不要爆版 */
+  margin: 60px auto;
+  padding: 24px 20px;
+  background: #f8f4ef;
+  border-radius: 16px;
+  text-align: left;
+  font-family: "Kaisei Tokumin", "Yuji Mai", serif;
+  color: #6b4f3b;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 2px dashed #f3c6c6;
+}
+    .transport p {
+  white-space: nowrap;   /* 🚫 不自動換行 */
+}
     .transport h2 { text-align: center; font-size: 22px; margin-bottom: 20px; letter-spacing: 1px; }
     .transport p { margin: 10px 0; line-height: 1.8; font-size: 16px; }
     .transport iframe {
@@ -377,36 +380,38 @@ form label {
   font-size: clamp(22px, 6vw, 26px);
 }
 
-/* ===== 手機排版優化 ===== */
-p,
+/* ===== 保留區塊置中 ===== */
+section {
+  text-align: center;
+}
+
+/* ===== 文字本體變成閱讀排版 ===== */
 .love-letter,
 .love-life,
 .love-quote,
 .quote-en,
-.timeline-text,
-.timeline-time,
-.transport p {
-  max-width: 26em;          /* 控制一行不要太長 */
+.timeline,
+.transport p,
+section p {
+  max-width: 26em;
   margin-left: auto;
   margin-right: auto;
 
-  line-height: 2;          /* 行距變好看 */
-  text-align: justify;     /* 中文比較不會歪 */
-  word-break: break-word; /* 防爆版 */
-  text-wrap: pretty;      /* 新瀏覽器會更漂亮 */
+  line-height: 2;
+  word-break: break-word;
+  text-wrap: pretty;
 }
 
-/* ===== 手機再微調 ===== */
+/* ===== 手機再調 ===== */
 @media (max-width: 600px) {
-  p,
   .love-letter,
   .love-life,
   .love-quote,
   .quote-en,
-  .timeline-text,
-  .timeline-time,
-  .transport p {
-    max-width: 20em;   /* 手機行寬再縮 */
+  .timeline,
+  .transport p,
+  section p {
+    max-width: 20em;
     letter-spacing: 0.08em;
   }
 }
