@@ -212,15 +212,22 @@
     .timeline-item { position: relative; margin-bottom: 30px; padding-left: 30px; text-align: left; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
     .timeline-item.show { opacity: 1; transform: translateY(0); }
     .timeline-item::before { content: "❤"; position: absolute; left: -4px; top: 2px; font-size: 14px; color: #c97b84; }
-    .section-title {
+  .section-title {
   font-family: "Kaisei Tokumin", "Yuji Mai", serif;
   color: #6b4f3b;
-  font-size: clamp(32px, 6vw, 48px); /* 🔥 比原本大 */
+  font-size: clamp(32px, 6vw, 48px); /* 放大標題 */
   letter-spacing: 1px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
   position: relative;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "✿";
+  margin: 0 12px;
+  color: #e5b3b8;
 }
     .timeline-time { font-weight: bold; color: #6b4f3b; margin-right: 6px; font-family: "Kaisei Tokumin", "Yuji Mai", serif; }
     .timeline-text { color: #333; font-family: "Kaisei Tokumin", "Yuji Mai", serif; }
@@ -567,7 +574,7 @@ section p {
 
 <!-- 10. Google 表單 -->
 <section class="bg5 fade-up">
-  <h2 class="section-title">✿出席回覆✿</h2>
+  <h2 class="section-title">出席回覆</h2>
   <div class="form-wrapper">
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" 
       width="100%" height="1200" frameborder="0">載入中…</iframe>
