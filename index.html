@@ -204,14 +204,41 @@
     }
     .love-life::before { content: "❤"; display: block; margin-bottom: 10px; color: #c97b84; }
 
-    .quote-en { font-family: "Times New Roman", serif; color: #6b4f3b; text-align: center; font-size: 18px; letter-spacing: 1px; margin: 40px auto; position: relative; }
-    .quote-en::before, .quote-en::after { content: ""; display: block; width: 60px; height: 1px; background: #c9b8a8; margin: 12px auto; }
+    .quote-en {
+  font-family: "Times New Roman", serif;
+  color: #6b4f3b;
+  text-align: center;
+  font-size: 18px;   /* 固定回原本大小 */
+  letter-spacing: 1px;
+  margin: 40px auto;
+  position: relative;
+  white-space: nowrap; /* 強制不換行，搭配打字效果最好看 */
+}
+.quote-en::before,
+.quote-en::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: #c9b8a8;
+  margin: 12px auto;
+}
 
     .timeline { position: relative; width: fit-content; margin: 40px auto 0; padding-left: 60px; }
     .timeline::before { content: ""; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: #c9b8a8; }
     .timeline-item { position: relative; margin-bottom: 30px; padding-left: 30px; text-align: left; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
     .timeline-item.show { opacity: 1; transform: translateY(0); }
-    .timeline-item::before { content: "❤"; position: absolute; left: -4px; top: 2px; font-size: 14px; color: #c97b84; }
+    .timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c97b84'%3E%3Cpath d='M12 21s-6.7-4.3-9.3-7.9C.8 10.8 2.3 6.5 6.4 6.5c2.1 0 3.4 1.2 3.6 1.5.2-.3 1.5-1.5 3.6-1.5 4.1 0 5.6 4.3 3.7 6.6C18.7 16.7 12 21 12 21z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
   .section-title {
   font-family: "Kaisei Tokumin", "Yuji Mai", serif;
   color: #6b4f3b;
@@ -366,10 +393,16 @@ p {
 }
 
 .love-life::before {
-  content: "❤";
+  content: "";
   display: block;
-  margin-bottom: 12px;
-  color: #c97b84;
+  margin-bottom: 10px;
+  width: 20px;   /* 愛心寬度 */
+  height: 20px;  /* 愛心高度 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c97b84'%3E%3Cpath d='M12 21s-6.7-4.3-9.3-7.9C.8 10.8 2.3 6.5 6.4 6.5c2.1 0 3.4 1.2 3.6 1.5.2-.3 1.5-1.5 3.6-1.5 4.1 0 5.6 4.3 3.7 6.6C18.7 16.7 12 21 12 21z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: auto;  /* 置中 */
+  margin-right: auto; /* 置中 */
 }
 
 /* ===== 流程表 ===== */
