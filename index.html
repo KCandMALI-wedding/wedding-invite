@@ -508,6 +508,50 @@ section p {
     letter-spacing: 0.08em;
   }
 }
+
+.seat-search {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.seat-search select,
+.seat-search input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-family: inherit;
+
+  box-sizing: border-box;  /* ⭐ 這行是關鍵 */
+}
+
+.seat-search button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #c97b84;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.seat-search button:hover {
+  background: #b0666f;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #6b4f3b;
+}
   </style>
 </head>
 <body>
@@ -619,7 +663,7 @@ section p {
     </div>
 
     <div class="timeline-item">
-      <span class="timeline-time">12:00</span>
+      <span class="timeline-time">12:30</span>
       <span class="timeline-text">婚宴開始</span>
     </div>
 
@@ -633,15 +677,16 @@ section p {
 <!-- 9. 交通資訊 -->
 <section class="transport">
   <h2>How to get there ✿ 交通資訊</h2>
-  <p>🏡 地址｜高雄市前鎮區林森四路189號(萊特薇庭高雄館)</p>
+  <p>🏡 地點｜萊特薇庭高雄館(承億酒店)11樓LUNA廳</p>
+  <p>　　　　~高雄市前鎮區林森四路189號~</p>
   <p>🚗 開車｜圖書館旁邊有停車場</p>
   <p>🚆 大眾運輸1-自行搭｜可搭至三多商圈捷運站 走12分</p>
   <p>🚌 大眾運輸2-搭接駁｜接送點在左營高鐵站</p>
-  <p>　　　　　　　　　　(等統計完再確定集合上車時間)</p>
+  <p>　　(接駁車名單已統計完畢，私下以Line群組通知。)</p>
   </section>
   </section>
   <div style="background:#f8f4ef; border-radius:16px; overflow:hidden;">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2st" width="100%" height="500" style="border:0; display:block;"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14732.771118935221!2d120.3022942!3d22.6092752!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e03437685d40f%3A0xe80f343bc21874d8!2z6JCK54m56JaH5bqtIOmrmOmbhOmkqCBMaWdodCBXZWRkaW5nIEthb2hzaXVuZw!5e0!3m2!1szh-TW!2stw!4v1704122272478!5m2!1szh-TW!2st" width="100%" height="400" style="border:0; display:block;"></iframe>
 </div>
 </section>
 
@@ -650,7 +695,36 @@ section p {
   <h2 class="section-title">出席回覆</h2>
   <div class="form-wrapper">
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4HU4IUZNq6NFDda1YOmG660JmDqTFKuJaCDCX48ni74UPuQ/viewform?embedded=true" 
-      width="100%" height="1800" frameborder="0">載入中…</iframe>
+      width="100%" height="250" frameborder="0">載入中…</iframe>
+  </div>
+</section>
+
+<!-- 11.查詢桌次系統 -->
+<section class="bg3 fade-up">
+  <h2 class="section-title">座位查詢</h2>
+
+  <div class="seat-search">
+
+    <select id="side">
+      <option value="">請選擇身份</option>
+      <option value="男方親友">男方親友</option>
+      <option value="女方親友">女方親友</option>
+    </select>
+
+    <select id="group1">
+      <option value="">請選擇群組</option>
+    </select>
+
+    <select id="group2">
+     <option value="">請選擇細分類</option>
+    </select>
+
+    <input type="text" id="keyword" placeholder="輸入名字關鍵字（至少2字）">
+
+    <button onclick="searchSeat()">查詢</button>
+
+    <div id="result"></div>
+
   </div>
 </section>
 
@@ -762,7 +836,140 @@ timelineItems.forEach(item => {
 });
 </script>
 
+<script>
+const sideSelect = document.getElementById("side");
+const group1Select = document.getElementById("group1");
+const group2Select = document.getElementById("group2"); 
+
+let data = [];
+
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAcZ2ZjcAx4GO3VMd85RT-Yuoc3ilsL1rAxyW507aBg1zeSz2lzHEkG0WbsF-9Gf-79xYOzhBKX2U8/pub?gid=1086206475&single=true&output=csv"; // ← 換成你的
+
+fetch(CSV_URL)
+  .then(res => res.text())
+  .then(text => {
+    const rows = text.split("\n").slice(1);
+
+    data = rows.map(row => {
+      const cols = row.split(",");
+      return {
+        side: cols[0],
+        group1: cols[1],
+        group2: cols[2],
+        name: cols[3],
+        alias: cols[4],
+        table: cols[5],
+        attendance: cols[6]
+      };
+    });
+  });
+
+// 動態更新群組
+document.getElementById("side").addEventListener("change", function() {
+  const side = this.value;
+  const group1Select = document.getElementById("group1");
+
+  const groups = [...new Set(
+    data.filter(d => d.side === side).map(d => d.group1)
+  )];
+
+  group1Select.innerHTML = '<option value="">請選擇群組</option>';
+
+  groups.forEach(g => {
+    const opt = document.createElement("option");
+    opt.value = g;
+    opt.textContent = g;
+    group1Select.appendChild(opt);
+  });
+});
+
+group1Select.addEventListener("change", function () {
+  const selectedSide = sideSelect.value;
+  const selectedGroup1 = this.value;
+
+  group2Select.innerHTML = '<option value="">請選擇細分類</option>';
+
+  if (!selectedGroup1) return;
+
+  const group2Set = new Set();
+
+  data.forEach(row => {
+    if (
+      row.side === selectedSide &&
+      row.group1 === selectedGroup1 &&
+      row.group2 // 👉 有值才放
+    ) {
+      group2Set.add(row.group2);
+    }
+  });
+
+  group2Set.forEach(g2 => {
+    const option = document.createElement("option");
+    option.value = g2;
+    option.textContent = g2;
+    group2Select.appendChild(option);
+  });
+});
+
+function searchSeat() {
+  const side = sideSelect.value;
+  const group1 = group1Select.value;
+  const group2 = group2Select.value;
+  const keyword = document.getElementById("keyword").value.trim();
+
+  const resultDiv = document.getElementById("result");
+
+  let found;
+
+  // ===== 名字優先 =====
+  if (keyword.length >= 2) {
+    found = data.find(d =>
+      (d.name && d.name.includes(keyword)) ||
+      (d.alias && d.alias.includes(keyword))
+    );
+  } 
+  // ===== 沒輸入名字 =====
+  else {
+    if (!side || !group1) {
+      resultDiv.innerHTML = "請選擇身份與群組，或輸入姓名喔～";
+      return;
+    }
+
+    // ⭐ 如果這個 group1 有 group2，但你沒選 → 不查
+    const hasGroup2 = data.some(d =>
+      d.side === side &&
+      d.group1 === group1 &&
+      d.group2 && d.group2 !== "-"
+    );
+
+    if (hasGroup2 && !group2) {
+      resultDiv.innerHTML = "請再選擇細分類喔～";
+      return;
+    }
+
+    found = data.find(d =>
+      d.side === side &&
+      d.group1 === group1 &&
+      (!group2 || d.group2 === group2) &&
+      (!d.name || d.name === "")
+    );
+  }
+
+  // ===== 顯示 =====
+  if (found) {
+    let html = `✨ 您的座位在 <b>第 ${found.table} 桌</b>`;
+
+    if (found.attendance && found.attendance.trim() !== "") {
+    html += `<br>👨‍👩‍👧‍👦 共 ${found.attendance} 位`;
+  }
+
+    resultDiv.innerHTML = html;
+  } else {
+    resultDiv.innerHTML = "查無資料，請重新確認唷～";
+  }
+}
+
+</script>
+
 </body>
-
 </html>
-
